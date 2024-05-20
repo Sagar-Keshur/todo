@@ -7,7 +7,7 @@ TextScaler get defaultTextScaler => TextScaler.noScaling;
 
 ThemeMode get defaultThemeMode => ThemeMode.light;
 
-String get productName => 'Dating App';
+String get productName => 'Todo App';
 
 double get defaultPaddingValue => 15;
 double get defaultSpaceValue => 20;

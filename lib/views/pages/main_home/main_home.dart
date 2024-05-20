@@ -30,8 +30,8 @@ class _MainHomePageState extends State<MainHomePage> {
 
   @override
   void dispose() {
-    super.dispose();
     _profileBloc.close();
+    super.dispose();
   }
 
   @override

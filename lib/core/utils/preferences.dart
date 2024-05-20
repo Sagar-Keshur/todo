@@ -15,7 +15,6 @@ class Preferences {
     _shared = await SharedPreferences.getInstance();
   }
 
-  ///Remember Me
   bool get isLogged => _shared?.getBool(_isLogged) ?? false;
 
   set isLogged(bool value) => _shared?.setBool(_isLogged, value);

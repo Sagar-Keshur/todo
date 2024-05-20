@@ -73,4 +73,9 @@ class HomeBloc extends Cubit<HomeState> {
     emit(state.copyWith(tasks: tasks, taskState: _TaskState.none));
     await repository.update(task);
   }
+
+  @override
+  void emit(HomeState state) {
+    if (!isClosed) super.emit(state);
+  }
 }

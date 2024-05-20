@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    super.dispose();
     _homeBloc.close();
+    super.dispose();
   }
 
   @override

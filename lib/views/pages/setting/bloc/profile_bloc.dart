@@ -25,4 +25,9 @@ class ProfileBloc extends Cubit<ProfileState> {
   void setUserInfo(UserData user) {
     emit(state.copyWith(userInfo: user, taskState: _TaskState.none));
   }
+
+  @override
+  void emit(ProfileState state) {
+    if (!isClosed) super.emit(state);
+  }
 }
