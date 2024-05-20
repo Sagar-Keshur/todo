@@ -24,8 +24,6 @@ class AddNotePage extends StatefulWidget {
 class _AddNotePageState extends State<AddNotePage> {
   late final HomeBloc _homeBloc = context.read<HomeBloc>();
 
-  bool isAdding = false;
-
   final TextEditingController title = TextEditingController();
 
   // @override
@@ -59,6 +57,13 @@ class _AddNotePageState extends State<AddNotePage> {
           style: context.textTheme.headlineLarge,
           cursorColor: TodoAppThemeData.basePrimary,
           controller: title,
+          onFieldSubmitted: (value) {
+            if (value.isNotEmpty) {
+              _homeBloc.updateIsAllowed(true);
+            } else {
+              _homeBloc.updateIsAllowed(false);
+            }
+          },
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Title',
@@ -115,11 +120,12 @@ class _AddNotePageState extends State<AddNotePage> {
   }
 
   Widget buildAddMainTask(BuildContext context, HomeState state) {
-    bool isAllowed = title.value.text.isNotEmpty;
+    bool isAllowed = state.isAllowed;
+
     return Visibility(
-      visible: isAllowed ? isAdding : false,
+      visible: isAllowed ? state.isAdding : false,
       replacement: GestureDetector(
-        onTap: isAllowed ? () => setState(() => isAdding = true) : () => setState(() => isAdding = false),
+        onTap: isAllowed ? () => _homeBloc.updateIsAdding(true) : () => _homeBloc.updateIsAdding(false),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -152,8 +158,7 @@ class _AddNotePageState extends State<AddNotePage> {
           if (newValue.isNotEmpty) {
             _homeBloc.addTask(task: MainTask(value: newValue));
           }
-          isAdding = false;
-          setState(() {});
+          _homeBloc.updateIsAdding(false);
         },
       ),
     );

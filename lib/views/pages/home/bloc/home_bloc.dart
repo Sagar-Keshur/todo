@@ -78,4 +78,12 @@ class HomeBloc extends Cubit<HomeState> {
   void emit(HomeState state) {
     if (!isClosed) super.emit(state);
   }
+
+  void updateIsAdding(bool value) {
+    emit(state.copyWith(isAdding: value, taskState: _TaskState.none));
+  }
+
+  void updateIsAllowed(bool value) {
+    emit(state.copyWith(isAllowed: value, taskState: _TaskState.none));
+  }
 }
